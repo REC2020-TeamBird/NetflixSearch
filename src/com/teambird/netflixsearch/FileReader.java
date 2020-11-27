@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+//https://stackoverflow.com/questions/2591098/how-to-parse-json-in-java -- JSON parsing
+
 public class FileReader {
 
     private final String fileName;
