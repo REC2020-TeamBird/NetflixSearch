@@ -23,7 +23,7 @@ public class JSONFormatter {
     public static List<String> JSONToList(String data, String attribute) {
         List<String> Data = new ArrayList<>();
 
-        if (!Objects.isNull(data) && data.length() > 0) {
+        if (!Objects.isNull(data) && data.length() > 0 && !data.equals("[]")) {
             getFormattedList(data).forEach(Value -> {
                 JSONObject jsonObject = new JSONObject(Value);
 

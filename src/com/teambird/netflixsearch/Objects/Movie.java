@@ -20,7 +20,7 @@ public class Movie {
     private List<String> ProductionCountries;
     private String ReleaseDate;
     private double Revenue;
-    private int Runtime;
+    private double Runtime;
     private List<String> SpokenLanguages;
     private String Status;
     private String TagLine;
@@ -33,66 +33,78 @@ public class Movie {
         List<String> Data = Arrays.asList(MovieData.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
 
         for (int i = 0; i < Data.size(); i++) {
+            String value = Data.get(i);
+
             switch (i) {
                 case 0:
-                    this.Budget = Integer.parseInt(Data.get(i));
+                    this.Budget = Integer.parseInt(value);
+
                     break;
                 case 1:
-                    this.Genres = JSONFormatter.JSONToList(Data.get(i), "name");
+                    this.Genres = JSONFormatter.JSONToList(value, "name");
                     break;
                 case 2:
-                    this.URL = Data.get(i);
+                    this.URL = value;
                     break;
                 case 3:
-                    this.MovieId = Integer.parseInt(Data.get(i));
+                    this.MovieId = Integer.parseInt(value);
                     break;
                 case 4:
-                    this.Keywords = JSONFormatter.JSONToList(Data.get(i), "name");
+                    this.Keywords = JSONFormatter.JSONToList(value, "name");
                     break;
                 case 5:
-                    this.Languages = Data.get(i);
+                    this.Languages = value;
                     break;
                 case 6:
-                    this.OriginalTitle = Data.get(i);
+                    this.OriginalTitle = value;
                     break;
                 case 7:
-                    this.Overview = Data.get(i);
+                    this.Overview = value;
                     break;
                 case 8:
-                    this.Popularity = Double.parseDouble(Data.get(i));
+                    this.Popularity = Double.parseDouble(value);
                     break;
                 case 9:
-                    this.ProductionCompanies = JSONFormatter.JSONToList(Data.get(i), "name");
+                    this.ProductionCompanies = JSONFormatter.JSONToList(value, "name");
                     break;
                 case 10:
-                    this.ProductionCountries = JSONFormatter.JSONToList(Data.get(i), "name");
+                    this.ProductionCountries = JSONFormatter.JSONToList(value, "name");
                     break;
                 case 11:
-                    this.ReleaseDate = Data.get(i);
+                    this.ReleaseDate = value;
                     break;
                 case 12:
-                    this.Revenue = Double.parseDouble(Data.get(i));
+                    this.Revenue = Double.parseDouble(value);
                     break;
                 case 13:
-                    this.Runtime = Integer.parseInt(Data.get(i));
+                    if (value.length() == 0 ){
+                        value = "-1";
+                    }
+                    this.Runtime = Double.parseDouble(value);
                     break;
                 case 14:
-                    this.SpokenLanguages = JSONFormatter.JSONToList(Data.get(i), "name");
+                    this.SpokenLanguages = JSONFormatter.JSONToList(value, "name");
                     break;
                 case 15:
-                    this.Status = Data.get(i);
+                    this.Status = value;
                     break;
                 case 16:
-                    this.TagLine = Data.get(i);
+                    this.TagLine = value;
                     break;
                 case 17:
-                    this.Title = Data.get(i);
+                    this.Title = value;
                     break;
                 case 18:
-                    this.VoteAverage = Double.parseDouble(Data.get(i));
+                    if (value.length() == 0 ){
+                        value = "-1";
+                    }
+                    this.VoteAverage = Double.parseDouble(value);
                     break;
                 case 19:
-                    this.VoteCount = Integer.parseInt(Data.get(i));
+                    if (value.length() == 0 ){
+                        value = "-1";
+                    }
+                    this.VoteCount = Integer.parseInt(value);
                     break;
                 default:
                     break;
