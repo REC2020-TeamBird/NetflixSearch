@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NetflixSearch:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NetflixSearch_jar</output-path>
+    <root id="archive" name="NetflixSearch.jar">
+      <element id="module-output" name="NetflixSearch" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/json-20201115.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

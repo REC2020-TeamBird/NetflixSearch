@@ -12,7 +12,17 @@ public class SearchEngine {
     private final List<Movie> Movies;
     private final List<Credits> Credits;
 
-    private final String[] Parameters = {"Genres", "Keywords", "Languages", "Title"};
+    private final String[][] Parameters = {
+            {
+                "Genres", "Genres"
+            },
+            {
+                "Keywords", "Keywords"
+            },
+            {
+                "Languages", "Languages"
+            }
+    };
 
     public SearchEngine(List<String> Movies, List<String> Credits) {
         System.out.println("Importing data...");
@@ -34,8 +44,8 @@ public class SearchEngine {
     private void DisplayParams() {
         System.out.println("\nThe following parameters can be used for searching:");
 
-        for (String parameter : Parameters) {
-            System.out.printf("- %s\n", parameter);
+        for (String[] parameter : Parameters) {
+            System.out.printf("- %s\n", parameter[0]);
         }
 
         System.out.println("\nWhen searching, either a single word or a set of words separated by commas can be used!");
@@ -44,8 +54,8 @@ public class SearchEngine {
     private void Search() {
         Map<String, List<String>> SearchData = new HashMap<>();
 
-        for (String parameter : Parameters) {
-            System.out.printf("\nPlease enter the %s or leave blank:", parameter);
+        for (String[] parameterData : Parameters) {
+            System.out.printf("\nPlease enter the %s or leave blank:", parameterData[1]);
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
@@ -59,7 +69,7 @@ public class SearchEngine {
                     inputs.set(i, inputs.get(i).toLowerCase());
                 }
 
-                SearchData.put(parameter, inputs);
+                SearchData.put(parameterData[0], inputs);
             }
         }
 
@@ -73,11 +83,17 @@ public class SearchEngine {
     }
 
     private void Select5Random() {
+        Random random = new Random();
 
+        for (int i = 0; i < 5; i++) {
+            int RandomNum = random.nextInt(this.Movies.size());
+            Movie movie = Movies.get(RandomNum);
+            System.out.printf("\nMovie #%d\n==========================\n%s\n", i+1, movie.toString());
+        }
     }
 
     public void Menu() {
-        System.out.println("\n=====Netflix Object Oriented Search (OOS)=====");
+        System.out.println("\n=====Netflux Object Oriented Search (NOOS)=====");
         System.out.println("Please select an option:");
         System.out.println("1) List all search parameters");
         System.out.println("2) Search movie");
@@ -101,6 +117,8 @@ public class SearchEngine {
                         break;
                     case 3:
                         Select5Random();
+                        Menu();
+                        break;
                     case 4:
                         System.out.println("\nThank you!");
                         System.exit(0);
@@ -117,6 +135,5 @@ public class SearchEngine {
             System.out.println("\nInvalid input! Please enter a valid number between 1 and 3!\n");
             Menu();
         }
-
     }
 }

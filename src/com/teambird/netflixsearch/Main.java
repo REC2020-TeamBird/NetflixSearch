@@ -2,8 +2,6 @@ package com.teambird.netflixsearch;
 
 import com.teambird.netflixsearch.Search.SearchEngine;
 
-import java.util.Scanner;
-
 public class Main {
 
     public Main() {

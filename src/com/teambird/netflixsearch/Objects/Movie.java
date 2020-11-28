@@ -112,7 +112,13 @@ public class Movie {
         String Title = this.map.get("Title").size() > 0 ? this.map.get("Title").get(0) : "Unknown";
         String TagLine = this.map.get("TagLine").size() > 0 ? "- " + this.map.get("TagLine").get(0) : "";
         String Overview = this.map.get("Overview").size() > 0 ? this.map.get("Overview").get(0) : "";
+        String Popularity = this.map.get("Popularity").size() > 0 ? this.map.get("Popularity").get(0) : "nil";
+        String Budget = this.map.get("Budget").size() > 0 ? this.map.get("Budget").get(0) : "nil";
 
-        return String.format("%s %s\nOverview: %s\nMatched Parameters: %s", Title, TagLine, Overview, this.MatchedParams.toString());
+        if (this.MatchedParams.size() > 0) {
+            return String.format("%s %s\nOverview: %s\nPopularity: %s - Budget: $%s\nMatched Parameters: %s", Title, TagLine, Overview, Popularity, Budget, this.MatchedParams.toString());
+        } else {
+            return String.format("%s %s\nOverview: %s\nPopularity: %s - Budget: $%s", Title, TagLine, Overview, Popularity, Budget);
+        }
     }
 }
