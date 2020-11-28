@@ -1,8 +1,8 @@
 package com.teambird.netflixsearch;
 
-import com.teambird.netflixsearch.Objects.Credits;
-import com.teambird.netflixsearch.Objects.Movie;
 import com.teambird.netflixsearch.Search.SearchEngine;
+
+import java.util.Scanner;
 
 public class Main {
 
@@ -11,6 +11,8 @@ public class Main {
         FileReader creditsCSV = new FileReader("tmdb_5000_credits.csv");
 
         SearchEngine searchEngine = new SearchEngine(moviesCSV.getData(), creditsCSV.getData());
+
+        searchEngine.Menu();
     }
 
     public static void main(String[] args){

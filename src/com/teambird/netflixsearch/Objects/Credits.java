@@ -1,5 +1,6 @@
 package com.teambird.netflixsearch.Objects;
 import com.teambird.netflixsearch.Util.JSONFormatter;
+import org.json.JSONException;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -26,8 +27,10 @@ public class Credits {
 
         if (matcher.find()) {
             // https://stackoverflow.com/questions/1005073/initialization-of-an-arraylist-in-one-line
-            List<Map<String, String>> ActorData = JSONFormatter.JSONToList(matcher.group(), Arrays.asList("character", "name"));
-            ActorData.forEach(actor -> Actors.add(new Actor(actor.get("character"), actor.get("name"))));
+            try {
+                List<Map<String, String>> ActorData = JSONFormatter.JSONToList(matcher.group(), Arrays.asList("character", "name"));
+                ActorData.forEach(actor -> Actors.add(new Actor(actor.get("character"), actor.get("name"))));
+            } catch (JSONException ignore) {}
         }
     }
 }

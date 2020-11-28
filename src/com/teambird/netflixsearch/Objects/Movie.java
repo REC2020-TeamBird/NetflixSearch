@@ -2,109 +2,100 @@ package com.teambird.netflixsearch.Objects;
 
 import com.teambird.netflixsearch.Util.JSONFormatter;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Movie {
-
-    private int Budget;
-    private List<String> Genres;
-    private String URL;
-    private int MovieId;
-    private List<String> Keywords;
-    private String Languages;
-    private String OriginalTitle;
-    private String Overview;
-    private double Popularity;
-    private List<String> ProductionCompanies;
-    private List<String> ProductionCountries;
-    private String ReleaseDate;
-    private double Revenue;
-    private double Runtime;
-    private List<String> SpokenLanguages;
-    private String Status;
-    private String TagLine;
-    private String Title;
-    private double VoteAverage;
-    private int VoteCount;
+    
+    private final Map<String, List<String>> map;
+    public int Matches;
+    public List<String> MatchedParams;
 
     public Movie(String MovieData) {
+        map = new HashMap<>();
+        Matches = 0;
+        MatchedParams = new ArrayList<>();
         // Split regex: https://stackoverflow.com/questions/18893390/splitting-on-comma-outside-quotes
         List<String> Data = Arrays.asList(MovieData.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
 
         for (int i = 0; i < Data.size(); i++) {
             String value = Data.get(i);
+            List<String> data = new ArrayList<>();
 
             switch (i) {
                 case 0:
-                    this.Budget = Integer.parseInt(value);
-
+                    data.add(value);
+                    map.put("Budget", data);
                     break;
                 case 1:
-                    this.Genres = JSONFormatter.JSONToList(value, "name");
+                    map.put("Genres", JSONFormatter.JSONToList(value, "name"));
                     break;
                 case 2:
-                    this.URL = value;
+                    data.add(value);
+                    map.put("URL", data);
                     break;
                 case 3:
-                    this.MovieId = Integer.parseInt(value);
+                    data.add(value);
+                    map.put("MovieId", data);
                     break;
                 case 4:
-                    this.Keywords = JSONFormatter.JSONToList(value, "name");
+                    map.put("Keywords", JSONFormatter.JSONToList(value, "name"));
                     break;
                 case 5:
-                    this.Languages = value;
+                    data.add(value);
+                    map.put("Languages", data);
                     break;
                 case 6:
-                    this.OriginalTitle = value;
+                    data.add(value);
+                    map.put("OriginalTitle", data);
                     break;
                 case 7:
-                    this.Overview = value;
+                    data.add(value);
+                    map.put("Overview", data);
                     break;
                 case 8:
-                    this.Popularity = Double.parseDouble(value);
+                    data.add(value);
+                    map.put("Popularity", data);
                     break;
                 case 9:
-                    this.ProductionCompanies = JSONFormatter.JSONToList(value, "name");
+                    map.put("ProductionCompanies", JSONFormatter.JSONToList(value, "name"));
                     break;
                 case 10:
-                    this.ProductionCountries = JSONFormatter.JSONToList(value, "name");
+                    map.put("ProductionCountries", JSONFormatter.JSONToList(value, "name"));
                     break;
                 case 11:
-                    this.ReleaseDate = value;
+                    data.add(value);
+                    map.put("ReleaseDate", data);
                     break;
                 case 12:
-                    this.Revenue = Double.parseDouble(value);
+                    data.add(value);
+                    map.put("Revenue", data);
                     break;
                 case 13:
-                    if (value.length() == 0 ){
-                        value = "-1";
-                    }
-                    this.Runtime = Double.parseDouble(value);
+                    data.add(value);
+                    map.put("Runtime", data);
                     break;
                 case 14:
-                    this.SpokenLanguages = JSONFormatter.JSONToList(value, "name");
+                    map.put("SpokenLanguages", JSONFormatter.JSONToList(value, "name"));
                     break;
                 case 15:
-                    this.Status = value;
+                    data.add(value);
+                    map.put("Status", data);
                     break;
                 case 16:
-                    this.TagLine = value;
+                    data.add(value);
+                    map.put("TagLine", data);
                     break;
                 case 17:
-                    this.Title = value;
+                    data.add(value);
+                    map.put("Title", data);
                     break;
                 case 18:
-                    if (value.length() == 0 ){
-                        value = "-1";
-                    }
-                    this.VoteAverage = Double.parseDouble(value);
+                    data.add(value);
+                    map.put("VoteAverage", data);
                     break;
                 case 19:
-                    if (value.length() == 0 ){
-                        value = "-1";
-                    }
-                    this.VoteCount = Integer.parseInt(value);
+                    data.add(value);
+                    map.put("VoteCount", data);
                     break;
                 default:
                     break;
@@ -112,29 +103,16 @@ public class Movie {
         }
     }
 
+    public Map<String, List<String>> getMap() {
+        return this.map;
+    }
+
     @Override
     public String toString() {
-        return "\nMovie{" +
-                "\nBudget=" + Budget +
-                "\n, Genres=" + Genres +
-                "\n, URL='" + URL + '\'' +
-                "\n, MovieId=" + MovieId +
-                "\n, Keywords=" + Keywords +
-                "\n, Languages='" + Languages + '\'' +
-                "\n, OriginalTitle='" + OriginalTitle + '\'' +
-                "\n, Overview='" + Overview + '\'' +
-                "\n, Popularity=" + Popularity +
-                "\n, ProductionCompanies=" + ProductionCompanies +
-                "\n, ProductionCountries=" + ProductionCountries +
-                "\n, ReleaseDate='" + ReleaseDate + '\'' +
-                "\n, Revenue=" + Revenue +
-                "\n, Runtime=" + Runtime +
-                "\n, SpokenLanguages=" + SpokenLanguages +
-                "\n, Status='" + Status + '\'' +
-                "\n, TagLine='" + TagLine + '\'' +
-                "\n, Title='" + Title + '\'' +
-                "\n, VoteAverage=" + VoteAverage +
-                "\n, VoteCount=" + VoteCount +
-                '}';
+        String Title = this.map.get("Title").size() > 0 ? this.map.get("Title").get(0) : "Unknown";
+        String TagLine = this.map.get("TagLine").size() > 0 ? "- " + this.map.get("TagLine").get(0) : "";
+        String Overview = this.map.get("Overview").size() > 0 ? this.map.get("Overview").get(0) : "";
+
+        return String.format("%s %s\nOverview: %s\nMatched Parameters: %s", Title, TagLine, Overview, this.MatchedParams.toString());
     }
 }
