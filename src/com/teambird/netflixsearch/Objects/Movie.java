@@ -15,76 +15,114 @@ public class Movie {
     private String Languages;
     private String OriginalTitle;
     private String Overview;
-    private int Popularity;
+    private double Popularity;
     private List<String> ProductionCompanies;
     private List<String> ProductionCountries;
     private String ReleaseDate;
-    private int Revenue;
+    private double Revenue;
     private int Runtime;
     private List<String> SpokenLanguages;
     private String Status;
     private String TagLine;
     private String Title;
-    private int VoteAverage;
+    private double VoteAverage;
     private int VoteCount;
 
     public Movie(String MovieData) {
         // Split regex: https://stackoverflow.com/questions/18893390/splitting-on-comma-outside-quotes
         List<String> Data = Arrays.asList(MovieData.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
-        JSONFormatter.JSONToList(Data.get(1), "name");
-//        JSONObject jsonObject = new JSONObject(Data.get(1).replaceAll("^\"|\"$", ""));
-//
-//
-//        System.out.println(jsonObject.toString());
 
-//        for (int i = 0; i < Data.size(); i++) {
-//            switch (i) {
-//                case 0:
-//                    this.Budget = Integer.parseInt(Data.get(i));
-//                    break;
-//                case 1:
-//
-//                    break;
-//                case 2:
-//                    break;
-//                case 3:
-//                    break;
-//                case 4:
-//                    break;
-//                case 5:
-//                    break;
-//                case 6:
-//                    break;
-//                case 7:
-//                    break;
-//                case 8:
-//                    break;
-//                case 9:
-//                    break;
-//                case 10:
-//                    break;
-//                case 11:
-//                    break;
-//                case 12:
-//                    break;
-//                case 13:
-//                    break;
-//                case 14:
-//                    break;
-//                case 15:
-//                    break;
-//                case 16:
-//                    break;
-//                case 17:
-//                    break;
-//                case 18:
-//                    break;
-//                case 19:
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
+        for (int i = 0; i < Data.size(); i++) {
+            switch (i) {
+                case 0:
+                    this.Budget = Integer.parseInt(Data.get(i));
+                    break;
+                case 1:
+                    this.Genres = JSONFormatter.JSONToList(Data.get(i), "name");
+                    break;
+                case 2:
+                    this.URL = Data.get(i);
+                    break;
+                case 3:
+                    this.MovieId = Integer.parseInt(Data.get(i));
+                    break;
+                case 4:
+                    this.Keywords = JSONFormatter.JSONToList(Data.get(i), "name");
+                    break;
+                case 5:
+                    this.Languages = Data.get(i);
+                    break;
+                case 6:
+                    this.OriginalTitle = Data.get(i);
+                    break;
+                case 7:
+                    this.Overview = Data.get(i);
+                    break;
+                case 8:
+                    this.Popularity = Double.parseDouble(Data.get(i));
+                    break;
+                case 9:
+                    this.ProductionCompanies = JSONFormatter.JSONToList(Data.get(i), "name");
+                    break;
+                case 10:
+                    this.ProductionCountries = JSONFormatter.JSONToList(Data.get(i), "name");
+                    break;
+                case 11:
+                    this.ReleaseDate = Data.get(i);
+                    break;
+                case 12:
+                    this.Revenue = Double.parseDouble(Data.get(i));
+                    break;
+                case 13:
+                    this.Runtime = Integer.parseInt(Data.get(i));
+                    break;
+                case 14:
+                    this.SpokenLanguages = JSONFormatter.JSONToList(Data.get(i), "name");
+                    break;
+                case 15:
+                    this.Status = Data.get(i);
+                    break;
+                case 16:
+                    this.TagLine = Data.get(i);
+                    break;
+                case 17:
+                    this.Title = Data.get(i);
+                    break;
+                case 18:
+                    this.VoteAverage = Double.parseDouble(Data.get(i));
+                    break;
+                case 19:
+                    this.VoteCount = Integer.parseInt(Data.get(i));
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
+    @Override
+    public String toString() {
+        return "\nMovie{" +
+                "\nBudget=" + Budget +
+                "\n, Genres=" + Genres +
+                "\n, URL='" + URL + '\'' +
+                "\n, MovieId=" + MovieId +
+                "\n, Keywords=" + Keywords +
+                "\n, Languages='" + Languages + '\'' +
+                "\n, OriginalTitle='" + OriginalTitle + '\'' +
+                "\n, Overview='" + Overview + '\'' +
+                "\n, Popularity=" + Popularity +
+                "\n, ProductionCompanies=" + ProductionCompanies +
+                "\n, ProductionCountries=" + ProductionCountries +
+                "\n, ReleaseDate='" + ReleaseDate + '\'' +
+                "\n, Revenue=" + Revenue +
+                "\n, Runtime=" + Runtime +
+                "\n, SpokenLanguages=" + SpokenLanguages +
+                "\n, Status='" + Status + '\'' +
+                "\n, TagLine='" + TagLine + '\'' +
+                "\n, Title='" + Title + '\'' +
+                "\n, VoteAverage=" + VoteAverage +
+                "\n, VoteCount=" + VoteCount +
+                '}';
+    }
 }

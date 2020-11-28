@@ -1,32 +1,33 @@
 package com.teambird.netflixsearch.Objects;
-import java.util.ArrayList;
+import com.teambird.netflixsearch.Util.JSONFormatter;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+// https://stackoverflow.com/questions/6109882/regex-match-all-characters-between-two-strings
+//https://stackoverflow.com/questions/600733/using-java-to-find-substring-of-a-bigger-string-using-regular-expression
+//https://stackoverflow.com/questions/928072/whats-the-regular-expression-that-matches-a-square-bracket
+
 public class Credits {
     int Movie_id;
-    String Movie_title;
-    String title;
+    String Movie_Title;
+    List<Actor> Actors;
 
-/*cast
-    cast_id, character, credit_id, gender, id, name, order */
+    public Credits (String CreditData) {
+        List<String> Data = Arrays.asList(CreditData.split(","));
 
-/*crew
-    credit_it, department, gender, id, job, name,
- */
+        this.Movie_id = Integer.parseInt(Data.get(0));
+        this.Movie_Title = Data.get(1);
+        this.Actors = new ArrayList<>();
 
-    public Credits (int Movie_id, String Movie_title, String cast, String crew){
-        this.Movie_id= Movie_id;
-        this.title= Movie_title;
+        Pattern matchPattern = Pattern.compile("\\[[^]]*]");
+        Matcher matcher = matchPattern.matcher(CreditData);
 
-    }
-    private int movie(int Movie_id){
-    return 0;
-    }
-    private String title(String title){
-    return "";
-    }
-    private String cast(int cast_id, String character, int credit_id, int gender, int id, String name, int order) {
-        return "";
-    }
-    private String crew(String credit_id, String department, int gender, int id, String job, String name){
-        return "";
+        if (matcher.find()) {
+            // https://stackoverflow.com/questions/1005073/initialization-of-an-arraylist-in-one-line
+            List<Map<String, String>> ActorData = JSONFormatter.JSONToList(matcher.group(), Arrays.asList("character", "name"));
+            ActorData.forEach(actor -> Actors.add(new Actor(actor.get("character"), actor.get("name"))));
+        }
     }
 }
